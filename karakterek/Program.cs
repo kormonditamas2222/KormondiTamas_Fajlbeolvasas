@@ -13,6 +13,8 @@
             }
             Console.WriteLine("Legtöbb Hp-s karakter: " + Legmagasabb_Eletero(karakterek));
             Console.WriteLine("Átlagszint: " + AtlagSzint(karakterek));
+            Console.WriteLine("Karakterek erő szerint sorrendbe állítva:");
+            ErossegSzerintRendezes(karakterek);
         }
 		static (string, int, int) Legmagasabb_Eletero(List<Karakter> karakterek)
 		{
@@ -37,6 +39,14 @@
 			}
 			return sum/karakterek.Count;
 		}
+		static void ErossegSzerintRendezes(List<Karakter> karakterek)
+		{
+			List<Karakter> rendezett = karakterek.OrderBy(o => o.Ero).ToList();
+            foreach (var item in rendezett)
+            {
+                Console.WriteLine(item);
+            }
+        }
 		static void Beolvasas(string fajlnev, List<Karakter> karakterek)
 		{
 			StreamReader sr = new(fajlnev);
