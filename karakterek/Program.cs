@@ -15,6 +15,8 @@
             Console.WriteLine("Átlagszint: " + AtlagSzint(karakterek));
             Console.WriteLine("Karakterek erő szerint sorrendbe állítva:");
             ErossegSzerintRendezes(karakterek);
+			ErosE(karakterek);
+			KarakterSzintSzures(karakterek);
         }
 		static (string, int, int) Legmagasabb_Eletero(List<Karakter> karakterek)
 		{
@@ -43,6 +45,37 @@
 		{
 			List<Karakter> rendezett = karakterek.OrderBy(o => o.Ero).ToList();
             foreach (var item in rendezett)
+            {
+                Console.WriteLine(item);
+            }
+        }
+		static void ErosE(List<Karakter> karakterek)
+		{
+            foreach (var item in karakterek)
+            {
+                if (item.Ero > 50)
+				{
+                    Console.WriteLine(item.Nev + " karakter ereje meghaladja az 50-et");
+                }
+				else
+				{
+                    Console.WriteLine(item.Nev + " karakter ereje nem haladja meg az 50-et");
+                }
+            }
+        }
+		static void KarakterSzintSzures(List<Karakter> karakterek)
+		{
+			List<Karakter> szurt = [];
+			Console.Write("Mennyi szintnél magasabbak legyenek a karakterek: ");
+			int hasonlito = Convert.ToInt16(Console.ReadLine());
+            foreach (var item in karakterek)
+            {
+                if (item.Szint > hasonlito)
+				{
+					szurt.Add(item);
+				}
+            }
+            foreach (var item in szurt)
             {
                 Console.WriteLine(item);
             }
