@@ -12,6 +12,20 @@
                 Console.WriteLine(item);
             }
         }
+		static (string, int, int) Legmagasabb_Eletero(List<Karakter> karakterek)
+		{
+			int index = 0;
+			int temp = karakterek[0].Eletero;
+            foreach (var item in karakterek)
+            {
+                if (item.Eletero > temp)
+				{
+					temp = item.Eletero;
+					index = karakterek.IndexOf(item);
+				}
+            }
+			return (karakterek[index].Nev, karakterek[index].Szint, karakterek[index].Ero);
+        }
 		static void Beolvasas(string fajlnev, List<Karakter> karakterek)
 		{
 			StreamReader sr = new(fajlnev);
