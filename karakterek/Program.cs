@@ -11,6 +11,8 @@
             {
                 Console.WriteLine(item);
             }
+            Console.WriteLine("Legtöbb Hp-s karakter: " + Legmagasabb_Eletero(karakterek));
+            Console.WriteLine("Átlagszint: " + AtlagSzint(karakterek));
         }
 		static (string, int, int) Legmagasabb_Eletero(List<Karakter> karakterek)
 		{
@@ -26,6 +28,15 @@
             }
 			return (karakterek[index].Nev, karakterek[index].Szint, karakterek[index].Ero);
         }
+		static int AtlagSzint(List<Karakter> karakterek)
+		{
+			int sum = 0;
+			foreach (var item in karakterek)
+			{
+				sum += item.Szint;
+			}
+			return sum/karakterek.Count;
+		}
 		static void Beolvasas(string fajlnev, List<Karakter> karakterek)
 		{
 			StreamReader sr = new(fajlnev);
