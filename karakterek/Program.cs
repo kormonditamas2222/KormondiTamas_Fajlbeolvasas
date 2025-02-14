@@ -17,6 +17,8 @@
             ErossegSzerintRendezes(karakterek);
 			ErosE(karakterek);
 			KarakterSzintSzures(karakterek);
+			CSVLetrehozas(karakterek);
+			CSVBeolvasasVisszaadas("karakterek.csv");
         }
 		static (string, int, int) Legmagasabb_Eletero(List<Karakter> karakterek)
 		{
@@ -80,6 +82,35 @@
                 Console.WriteLine(item);
             }
         }
+		static void CSVLetrehozas(List<Karakter> karakterek)
+		{
+			string ut = "karakterek.csv";
+			using (StreamWriter writer = new(ut))
+			{
+                foreach (var item in karakterek)
+                {
+					var line = string.Format("{0};{1};{2};{3}", item.Nev, item.Szint, item.Eletero, item.Ero);
+					writer.WriteLine(line);
+					writer.Flush();
+                }
+            }
+            Console.WriteLine("CSV fájl létrehozva");
+        }
+		static void CSVBeolvasasVisszaadas(string fajlnev)
+		{
+			string[] sorok = File.ReadAllLines(fajlnev);
+			List<Karakter> karakterek = [];
+			foreach (var sor in sorok)
+			{
+				string[] szavak = sor.Split(";");
+				Karakter karakter = new(szavak[0], Convert.ToInt16(szavak[1]), Convert.ToInt16(szavak[2]), Convert.ToInt16(szavak[3]));
+				karakterek.Add(karakter);
+			}
+			foreach (var item in karakterek)
+			{
+                Console.WriteLine(item);
+            }
+		}
 		static void Beolvasas(string fajlnev, List<Karakter> karakterek)
 		{
 			StreamReader sr = new(fajlnev);
