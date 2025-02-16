@@ -22,6 +22,7 @@ namespace karakterek
 			CSVLetrehozas(karakterek);
 			CSVBeolvasasVisszaadas("karakterek.csv");
 			Top3(karakterek);
+			Rangsor(karakterek);
         }
 		static (string, int, int) Legmagasabb_Eletero(List<Karakter> karakterek)
 		{
@@ -122,6 +123,15 @@ namespace karakterek
 			{
 				Console.WriteLine(rendezett[i].Nev + " " + rendezett[i].Szint + " " + rendezett[i].Ero);
 			}
+        }
+		static void Rangsor(List<Karakter> karakterek)
+		{
+            List<Karakter> rendezett = karakterek.OrderBy(o => o.Ero + o.Eletero).ToList();
+			rendezett.Reverse();
+            foreach (var item in rendezett)
+            {
+                Console.WriteLine(item.Nev + " " + (item.Ero + item.Eletero));
+            }
         }
 		static void Beolvasas(string fajlnev, List<Karakter> karakterek)
 		{
