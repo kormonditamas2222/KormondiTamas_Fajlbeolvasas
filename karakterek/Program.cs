@@ -1,4 +1,6 @@
-﻿namespace karakterek
+﻿using System.Net.Sockets;
+
+namespace karakterek
 {
 	internal class Program
 	{
@@ -19,6 +21,7 @@
 			KarakterSzintSzures(karakterek);
 			CSVLetrehozas(karakterek);
 			CSVBeolvasasVisszaadas("karakterek.csv");
+			Top3(karakterek);
         }
 		static (string, int, int) Legmagasabb_Eletero(List<Karakter> karakterek)
 		{
@@ -111,6 +114,15 @@
                 Console.WriteLine(item);
             }
 		}
+		static void Top3(List<Karakter> karakterek)
+		{
+            List<Karakter> rendezett = karakterek.OrderBy(o => o.Ero + o.Szint).ToList();
+            rendezett.Reverse();
+			for (int i = 0; i < 3; i++)
+			{
+				Console.WriteLine(rendezett[i].Nev + " " + rendezett[i].Szint + " " + rendezett[i].Ero);
+			}
+        }
 		static void Beolvasas(string fajlnev, List<Karakter> karakterek)
 		{
 			StreamReader sr = new(fajlnev);
