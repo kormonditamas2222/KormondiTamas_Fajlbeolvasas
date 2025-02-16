@@ -4,6 +4,7 @@ namespace karakterek
 {
 	internal class Program
 	{
+		static Random random = new();
 		static void Main(string[] args)
 		{
 			List<Karakter> karakterek = [];
@@ -23,6 +24,7 @@ namespace karakterek
 			CSVBeolvasasVisszaadas("karakterek.csv");
 			Top3(karakterek);
 			Rangsor(karakterek);
+			Csata(karakterek);
         }
 		static (string, int, int) Legmagasabb_Eletero(List<Karakter> karakterek)
 		{
@@ -133,6 +135,28 @@ namespace karakterek
                 Console.WriteLine(item.Nev + " " + (item.Ero + item.Eletero));
             }
         }
+		static void Csata(List<Karakter> karakterek)
+		{
+			int k1 = random.Next(karakterek.Count);
+			int k2 = random.Next(karakterek.Count);
+			while (k1 == k2)
+			{
+				k2 = random.Next(karakterek.Count);
+			}
+			Console.WriteLine($"{karakterek[k1].Nev} és {karakterek[k2].Nev} csatája következik.");
+			if (karakterek[k1].Szint + karakterek[k1].Ero > karakterek[k2].Szint + karakterek[k2].Ero)
+			{
+				Console.WriteLine($"{karakterek[k1].Nev} a nyertes. Összpontja: {karakterek[k1].Szint + karakterek[k1].Ero} nagyobb, mint {karakterek[k2].Nev} {karakterek[k2].Szint + karakterek[k2].Ero} pontja");
+			}
+			else if (karakterek[k1].Szint < karakterek[k2].Szint) 
+			{
+                Console.WriteLine($"{karakterek[k2].Nev} a nyertes. Összpontja {karakterek[k2].Szint + karakterek[k2].Ero} nagyobb, mint {karakterek[k1].Nev} {karakterek[k1].Szint + karakterek[k1].Ero} pontja");
+			}
+			else
+			{
+                Console.WriteLine("A két fél egyenlő! Nincs nyertes!");
+			}
+		}
 		static void Beolvasas(string fajlnev, List<Karakter> karakterek)
 		{
 			StreamReader sr = new(fajlnev);
